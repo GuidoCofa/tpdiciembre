@@ -1,0 +1,66 @@
+@{
+    ViewData["Title"] = ViewBag.Equipo.Nombre;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div class="cardsContainer">
+        @foreach(Jugador jugador in ViewBag.Jugadores){
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@Html.Raw(jugador.Imagen)" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@jugador.Nombre @jugador.Apellido</h5>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="traerJugador(@jugador.idJugador)">
+                        Ver
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="nombre"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="" id="imagen" alt="imagen jugador" width="200">
+        <p id="fechaNacimiento">Fecha de nacimiento: </p>
+        <p id="numeroCamiseta">Numero de camiseta: </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function traerJugador(id){
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            url: '/Home/ObtenerJugador',
+            data: {idJugador: id},
+            success:
+                function (response){
+                    console.log(response);
+                    const imagen = document.getElementById("imagen");
+                    imagen.src = response.imagen;
+                    const nombre = document.getElementById("nombre");
+                    nombre.innerText = response.nombre + " " + response.apellido;
+                    const fechaNacimiento = document.getElementById("fechaNacimiento");
+                    fechaNacimiento.innerText += response.fechaNacimiento.split('T')[0];
+                    const numeroCamiseta = document.getElementById("numeroCamiseta");
+                    numeroCamiseta.innerText += response.numeroCamiseta;
+                }
+        });
+    }
+
+</script>

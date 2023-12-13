@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Equipos";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div class="cardsContainer">
+        @foreach(Equipo equipo in ViewBag.Equipos){
+            <div class="card">
+                <img class="card-img-top" src="@Html.Raw(equipo.Imagen)" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@equipo.Nombre</h5>
+                    <a href="@Url.Action("Equipo", "Home", new {equipo.idEquipo})" class="btn btn-primary">Ver jugadores</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
