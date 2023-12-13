@@ -62,5 +62,21 @@
                 }
         });
     }
+function obtenerTorneosPorEquipo(equipo) {
+    $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        url: '/Torneos/ObtenerTorneosPorEquipo',
+        data: { equipo: equipo },
+        success: function (response) {
+            console.log(response);
 
+
+            const listaTorneos = response.torneos;
+
+
+            mostrarListaTorneos(listaTorneos);
+        }
+    });
+}
 </script>

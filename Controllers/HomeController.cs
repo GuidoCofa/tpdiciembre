@@ -44,6 +44,12 @@ public class HomeController : Controller
         return BD.ObtenerJugador(idJugador);
     }
 
+
+
+    public List<Torneos> MostrarTorneos(int idEquipo){
+        return BD.ListaTorneos(idEquipo);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

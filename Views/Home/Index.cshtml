@@ -10,7 +10,12 @@
                 <img class="card-img-top" src="@Html.Raw(equipo.Imagen)" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">@equipo.Nombre</h5>
-                    <a href="@Url.Action("Equipo", "Home", new {equipo.idEquipo})" class="btn btn-primary">Ver jugadores</a>
+                    <a href="@Url.Action("Equipo" , "Home", new {equipo.idEquipo})" class="btn btn-primary">Ver jugadores</a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="MostrarTorneos(@equipo.idEquipo)">
+                        Ver
+                    </button>
+
+
                 </div>
             </div>
         }

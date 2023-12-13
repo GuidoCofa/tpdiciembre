@@ -42,4 +42,16 @@ public static class BD
             return db.QueryFirstOrDefault<Jugador>(sql, new {idJugador});
         }
     }
+
+public static List<Torneos> ListaTorneos(int IdEquipo)
+{
+List<Torneos> ListaTorneos = new List<Torneos>();
+using(SqlConnection db = new SqlConnection(_connectionString))
+{
+string sql = "SELECT * FROM Torneos WHERE IdEquipo = @pIdEquipo";
+ListaTorneos = db.Query<Torneos>(sql,new {pIdEquipo=IdEquipo}).ToList();
 }
+return ListaTorneos;
+}
+}
+
